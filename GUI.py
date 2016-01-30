@@ -28,7 +28,7 @@ var2.set("newspaper") # initial value
 option2 = OptionMenu(master, var2, "newspaper", "report", "essay")
 option2.pack()
 
-f = Frame(master,height=40, width=300)  #be sure to use integers here
+f = Frame(master,height=40, width=300)  #only use integers here
 
 
 f.pack_propagate(0)
