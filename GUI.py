@@ -10,6 +10,7 @@ def display_selection_level():
 def display_selection_register():
     print "You've selected: >>" + register.get() + "<< as your register. "
 
+
 def display_entered_sentence():
     print "You've requested the complexity level of the sentence >>" + userSentence.get() + "<<. "
 
@@ -67,8 +68,8 @@ userSentence.pack()
 enteredSentence = userSentence.get()
 
 # button to display level currently selected
-foreignSent = Button(master, text="Print sentence entered by the user!", command=display_entered_sentence)
-foreignSent.pack()
+unknownSent = Button(master, text="Print sentence entered by the user!", command=display_entered_sentence)
+unknownSent.pack()
 
 
 f = Frame(master,height=40, width=300)  # only integers to use here
