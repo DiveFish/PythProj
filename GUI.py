@@ -2,56 +2,79 @@ from Tkinter import *
 
 master = Tk()
 
-'''
-my_entry=Entry(master)
-my_entry.pack()
-'''
 
-def handle_selection():
-    print "You've selected >>" + var.get() + "<< as your level. "
-
-def handle_selection2():
-    print "You've selected: >>" + var2.get() + "<< as your register. "
+def display_selection_level():
+    print "You've selected >>" + level.get() + "<< as your level. "
 
 
-#drop down for choosing level
-level = Label(text="Choose a level: ")
-level.pack()
+def display_selection_register():
+    print "You've selected: >>" + register.get() + "<< as your register. "
 
-var = StringVar(master)
-var.set("easy") # initial value
-
-option = OptionMenu(master, var, "easy", "medium", "difficult")
-option.pack()
-
-selectedLevel = var.get()
-
-#button to display level currently selected
-b = Button(master, text="Print selected level?", command=handle_selection)
-b.pack()
+def display_entered_sentence():
+    print "You've requested the complexity level of the sentence >>" + userSentence.get() + "<<. "
 
 
-#drop down for choosing register
-register = Label(text="Choose a register: ")
-register.pack()
+emptyLine = Label(text=" ")
+emptyLine.pack()
 
-var2 = StringVar(master)
-var2.set("newspaper") # initial value
+# drop down for choosing level
+chooseLevel = Label(text="Choose a level: ")
+chooseLevel.pack()
 
-option2 = OptionMenu(master, var2, "newspaper", "report", "essay")
-option2.pack()
+level = StringVar(master)
+level.set("easy") # initial value
 
-selectedRegister = var2.get()
+levelOptions = OptionMenu(master, level, "easy", "medium", "difficult")
+levelOptions.pack()
+
+selectedLevel = level.get()
+
+# button to display level currently selected
+selLev = Button(master, text="Print selected level?", command=display_selection_level)
+selLev.pack()
+
+emptyLine = Label(text=" ")
+emptyLine.pack()
 
 
-#button to display register currently selected
-b2 = Button(master, text="Print selected register?", command=handle_selection2)
-b2.pack()
+# drop-down menu for choosing register
+chooseRegister = Label(text="Choose a register: ")
+chooseRegister.pack()
+
+register = StringVar(master)
+register.set("newspaper") # initial value
+
+registerOptions = OptionMenu(master, register, "newspaper", "report", "essay")
+registerOptions.pack()
+
+selectedRegister = register.get()
 
 
-f = Frame(master,height=40, width=300)  #only integers to use here
+# button to display register currently selected
+selReg = Button(master, text="Print selected register?", command=display_selection_register)
+selReg.pack()
+
+emptyLine = Label(text=" ")
+emptyLine.pack()
+
+
+# field to enter text for which user wants complexity level
+enterSentence = Label(text="Want a sentence of your own evaluated? Just enter it here: ")
+enterSentence.pack()
+userSentence=Entry(master)
+userSentence.pack()
+
+enteredSentence = userSentence.get()
+
+# button to display level currently selected
+foreignSent = Button(master, text="Print sentence entered by the user!", command=display_entered_sentence)
+foreignSent.pack()
+
+
+f = Frame(master,height=40, width=300)  # only integers to use here
+
 f.pack_propagate(0)
 f.pack()
 
-master.title("Complexity analysis")
+master.title("Complexity Analysis")
 mainloop()
