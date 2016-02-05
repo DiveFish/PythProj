@@ -9,16 +9,29 @@ def submitted_values():
     if not userText.get():
         print "No text was entered."
         if not fileName.get():
-            print "No filename was entered."
+            print "No file name was entered."
         else:
             print "Warning: the file <" + fileName.get() + "> will be empty."
     else:
         print "You've requested the complexity level of the text: " + userText.get()
-        print "It will be saved in the file " + fileName.get()
+        print "It will be saved in this file: " + fileName.get()
 
+
+# can be adapted to actually saving output and not input when the respective methods are ready
 def save_to_file():
-    open(fileName.get() + ".txt", "w").write(userText.get())
-
+    wr = open(fileName.get() + ".txt", "w")
+    nl = "\n"
+    wr.write("You've selected the level: " + level.get() + nl)
+    wr.write("You've selected the register: " + register.get() + nl)
+    if not userText.get():
+        wr.write("No text was entered."  + nl)
+        if not fileName.get():
+            wr.write("No file name was entered." + nl)
+        else:
+            wr.write("Warning: the file <" + fileName.get() + "> will be empty." + nl)
+    else:
+        wr.write("You've requested the complexity level of the text: " + userText.get() + nl)
+        wr.write("It was saved in the file called: " + fileName.get() + ".txt" + nl)
 
 
 emptyLine = Label(text=" ")
@@ -58,6 +71,7 @@ enterSentence = Label(text="Want a text of your own evaluated? Just enter it her
 enterSentence.pack()
 userText=Entry(master)
 userText.pack()
+# field to enter filename where output will be saved
 enterFileName = Label(text="Please name the output file: ")
 enterFileName.pack()
 fileName=Entry(master)
@@ -69,15 +83,15 @@ emptyLine.pack()
 
 
 # button to display level currently selected
-unknownText = Button(master, text="Print submitted values!", command=submitted_values)
+unknownText = Button(master, text="Print submitted values to screen!", command=submitted_values)
 unknownText.pack()
 
-emptyLine = Label(text=" ")
+emptyLine = Label(text="OR")
 emptyLine.pack()
 
 
 # button to display level currently selected
-saveToFile = Button(master, text="Save output to a file!", command=save_to_file)
+saveToFile = Button(master, text="Save all input data to a file!", command=save_to_file)
 saveToFile.pack()
 
 
