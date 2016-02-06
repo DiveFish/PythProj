@@ -1,3 +1,10 @@
+
+'''
+Created on 06 Feb 2016
+@author: Pat
+'''
+
+
 # tags from the Penn Tree Bank
 # pronouns incl. wh-pronouns
 PennPronTags = ['PRP','PRP$','WP','WP$']
