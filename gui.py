@@ -1,3 +1,10 @@
+
+'''
+Created in Jan 2016
+@author: Pat
+'''
+
+
 from Tkinter import *
 
 master = Tk()
