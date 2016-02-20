@@ -6,38 +6,17 @@ from corpustags import news_tagged_sents, editorial_tagged_sents, review_tagged_
 from nps_tags import nps_chat_tagged
 from tag_set import penn_pron_tags, brown_pron_tags
 
+def count_pronouns(tagged_corpus):
+    num_of_pronouns = 0
+    for sent in tagged_corpus:
+        for (word, tag) in sent:
+            if (tag in brown_pron_tags) or (tag in penn_pron_tags):
+                num_of_pronouns = num_of_pronouns + 1
+                print word + ' ' + tag
+    return num_of_pronouns
+
 print 'PRONOUN COUNTS FOR ACCESSED CORPORA'
-
-nps_chat_pron_count = 0
-for sent in nps_chat_tagged:
-    for (word, tag) in sent:
-        if tag[:2] in penn_pron_tags:
-            nps_chat_pron_count = nps_chat_pron_count + 1
-print 'chat pronouns: '+str(nps_chat_pron_count)
-
-news_pron_count = 0
-for sent in news_tagged_sents:
-    for (word, tag) in sent:
-        if tag[:2] in brown_pron_tags:
-            news_pron_count = news_pron_count + 1
-            #print word + ' ' + tag
-print 'news pronouns: '+str(news_pron_count)
-
-editorial_pron_count = 0
-for sent in editorial_tagged_sents:
-    for (word, tag) in sent:
-        if tag[:2] in brown_pron_tags:
-            editorial_pron_count = editorial_pron_count + 1
-            #print word + ' ' + tag
-print 'editorial pronouns: '+str(editorial_pron_count)
-
-review_pron_count = 0
-for sent in review_tagged_sents:
-    for (word, tag) in sent:
-        if tag[:2] in brown_pron_tags:
-            review_pron_count = review_pron_count + 1
-            #print word + ' ' + tag
-
-print 'review pronouns: '+str(review_pron_count)
-
-
+print 'chat pronouns: ' + str(count_pronouns(nps_chat_tagged))
+print 'news pronouns: ' + str(count_pronouns(news_tagged_sents))
+print 'editorial pronouns: ' + str(count_pronouns(editorial_tagged_sents))
+print 'review pronouns: ' + str(count_pronouns(review_tagged_sents))
