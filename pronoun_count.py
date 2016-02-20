@@ -31,5 +31,5 @@ print 'news pronouns: ' + str(count_pronouns_corpus(news_tagged_sents))
 print 'editorial pronouns: ' + str(count_pronouns_corpus(editorial_tagged_sents))
 print 'review pronouns: ' + str(count_pronouns_corpus(review_tagged_sents))
 
-sentence = [('Who','WPO'), ('do','V'), ('you','PPSS'), ('love','V'), ('?','.')]
-print 'review pronouns (sentence): ' + str(count_pronouns_sent(sentence))
+sentence = [('Who','WPO'), ('do','DO'), ('you','PPSS'), ('love','VB'), ('?','.')]
+print 'Pronouns in a random sentence: ' + str(count_pronouns_sent(sentence))
