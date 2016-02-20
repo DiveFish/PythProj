@@ -7,22 +7,25 @@ from nps_tags import nps_chat_tagged
 from tag_set import penn_pron_tags, brown_pron_tags
 
 
-def count_pronouns(tagged_corpus):
+def count_pronouns_corpus(tagged_corpus):
     num_of_pronouns = 0
     for sent in tagged_corpus:
         for (word, tag) in sent:
             if (tag in brown_pron_tags) or (tag in penn_pron_tags):
                 num_of_pronouns += 1
-                # print word + ' ' + tag
-            '''
-            to check that no word which should be counted has been missed
-            if word == "some pronoun":
-                print '   ' + word
-            '''
     return num_of_pronouns
 
+
+def count_pronouns_sent(tagged_sent):
+    num_of_pronouns = 0
+    for (word, tag) in tagged_sent:
+        if (tag in brown_pron_tags) or (tag in penn_pron_tags):
+            num_of_pronouns += 1
+    return num_of_pronouns
+
+
 print 'PRONOUN COUNTS FOR ACCESSED CORPORA'
-print 'chat pronouns: ' + str(count_pronouns(nps_chat_tagged))
-print 'news pronouns: ' + str(count_pronouns(news_tagged_sents))
-print 'editorial pronouns: ' + str(count_pronouns(editorial_tagged_sents))
-print 'review pronouns: ' + str(count_pronouns(review_tagged_sents))
+print 'chat pronouns: ' + str(count_pronouns_corpus(nps_chat_tagged))
+print 'news pronouns: ' + str(count_pronouns_corpus(news_tagged_sents))
+print 'editorial pronouns: ' + str(count_pronouns_corpus(editorial_tagged_sents))
+print 'review pronouns: ' + str(count_pronouns_corpus(review_tagged_sents))
