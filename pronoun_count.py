@@ -13,7 +13,12 @@ def count_pronouns(tagged_corpus):
         for (word, tag) in sent:
             if (tag in brown_pron_tags) or (tag in penn_pron_tags):
                 num_of_pronouns += 1
-                print word + ' ' + tag
+                # print word + ' ' + tag
+            '''
+            to check that no word which should be counted has been missed
+            if word == "some pronoun":
+                print '   ' + word
+            '''
     return num_of_pronouns
 
 print 'PRONOUN COUNTS FOR ACCESSED CORPORA'
