@@ -7,7 +7,7 @@ from corpustags import news_tagged_sents, editorial_tagged_sents, review_tagged_
 from nps_tags import nps_chat_tagged
 
 
-def sentence_length(tagged_corpus):
+def sentence_length_corpus(tagged_corpus):
     sent_and_length=list()
     num_of_iter = 0
     for sent in tagged_corpus:
@@ -19,9 +19,9 @@ def sentence_length(tagged_corpus):
     return sent_and_length
 
 
-def single_sent_length(sentence):
+def single_sent_length(sent):
     sent_length = 0
-    for (word, tag) in sentence:
+    for (word, tag) in sent:
         sent_length += 1
     return sent_length
 
@@ -49,7 +49,7 @@ def average_sent_length(tagged_corpus):
 
 # Test sentence length for text from Brown corpus
 print "Sentence analysis of Brown EDITORIAL corpus"
-for item in sentence_length(editorial_tagged_sents):
+for item in sentence_length_corpus(editorial_tagged_sents):
     print "Sentence No. (" + str(item[0]) + ") and its length <" + str(item[1]) + ">"
 
 print "Total number of sentences in Brown editorial corpus: "+ str(num_of_sent(editorial_tagged_sents))
@@ -57,7 +57,7 @@ print "Total number of sentences in Brown editorial corpus: "+ str(num_of_sent(e
 
 # Test sentence length for chat corpus
 print "Sentence analysis of CHAT corpus"
-for item in sentence_length(nps_chat_tagged):
+for item in sentence_length_corpus(nps_chat_tagged):
     print "Sentence No. (" + str(item[0]) + ") and its length <" + str(item[1]) + ">"
 
 print "Total number of sentences in chat corpus: "+ str(num_of_sent(nps_chat_tagged))
