@@ -1,5 +1,6 @@
 """
 Created on 20 Feb 2016
+Updated on 21 Feb 2016
 @author: pat
 """
 
@@ -12,7 +13,7 @@ def count_pronouns_corpus(tagged_corpus):
     num_of_pronouns = 0
     for sent in tagged_corpus:
         for (word, tag) in sent:
-            if (tag in brown_pron_tags) or (tag in penn_pron_tags):
+            if (brown_pron_tags.__contains__(tag)) or (penn_pron_tags.__contains__(tag)):
                 num_of_pronouns += 1
     return num_of_pronouns
 
@@ -20,7 +21,7 @@ def count_pronouns_corpus(tagged_corpus):
 def count_pronouns_sent(tagged_sent):
     num_of_pronouns = 0
     for (word, tag) in tagged_sent:
-        if (tag in brown_pron_tags) or (tag in penn_pron_tags):
+        if (brown_pron_tags.__contains__(tag)) or (penn_pron_tags.__contains__(tag)):
             num_of_pronouns += 1
     return num_of_pronouns
 
