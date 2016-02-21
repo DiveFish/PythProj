@@ -19,6 +19,13 @@ def sentence_length(tagged_corpus):
     return sent_and_length
 
 
+def single_sent_length(sentence):
+    sentence_length=0
+    for (word,tag) in sentence:
+        sentence_length+=1
+    return sentence_length
+
+
 def num_of_sents(tagged_corpus):
     sent_count=0
     for sent in tagged_corpus:
@@ -38,3 +45,8 @@ for item in sentence_length(nps_chat_tagged):
     print "Sentence No. (" + str(item[0]) +") and its length <" + str(item[1]) + ">"
 
 print "Total number of sentences: "+ str(num_of_sents(nps_chat_tagged))
+
+
+# Test for random sentence
+sentence = [("Who","WPO"), ("do","DO"), ("you","PPSS"), ("love","VB"), ("?",".")]
+print "Length of a single sentence: " + str(single_sent_length(sentence))
