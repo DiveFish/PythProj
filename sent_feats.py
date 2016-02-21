@@ -36,7 +36,6 @@ def num_of_sent(tagged_corpus):
 def average_sent_length(tagged_corpus):
     total_length = 0
     sent_count = 0
-    average_length = 0
     for sent in tagged_corpus:
         sent_count += 1.0
         sent_length = 0
