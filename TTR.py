@@ -1,11 +1,11 @@
 '''
 Created on 20 Feb 2016
-Updated on 21 Feb 2016
+Updated on 24 Feb 2016
 
 @author: kibs
 '''
-
-from corpustags import news_words, news_tagged
+import nltk
+from nltk.corpus import brown 
 
 # take a list of words
 def TTR(text):
@@ -13,6 +13,7 @@ def TTR(text):
     type = 0.0
     word_list = list()
     for word in text:
+        word = word.lower()
         if word_list.__contains__(word):
             continue
         else:
@@ -25,6 +26,7 @@ def TTR_tagged(tagged_text):
     type = 0.0
     word_list = list()
     for (word, tag) in tagged_text:
+        word = word.lower()
         if word_list.__contains__(word):
             continue
         else:
@@ -32,7 +34,9 @@ def TTR_tagged(tagged_text):
             type = type + 1.0
     return type/tokens
 
-#print news_words
-print TTR(news_words)
+print TTR(['a','b','c','d','e','e'])
 
+news_words = brown.words(fileids="ca16")
+print TTR(news_words)
+news_tagged = brown.tagged_words(fileids="ca16")
 print TTR_tagged(news_tagged)
