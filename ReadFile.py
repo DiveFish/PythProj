@@ -9,15 +9,18 @@ import os
 import sys
 
 def read_file():
+    #newpath is the path where the folder for the output files is created
     newpath = 'C:\Users\Ankita\Desktop\WS 2015_16\Python\Project\Proj\OutputFiles'
     if not os.path.exists(newpath):
         os.makedirs(newpath)
-
+    
+    #"InputFiles" is the folder containing all input files
     list_of_files = os.listdir("InputFiles")
     for x in list_of_files:
-        ip = 'C:\Users\Ankita\Desktop\WS 2015_16\Python\Project\Proj\InputFiles' + x
-        f = open(ip, "r")
+        f = open(x, "r") #I get an error here. It cannot recognise the filename. Have tried giving the complete path but same error
         y = os.path.basename(f.name)
+        
+        #Modify path accordingly to path of output file folder
         filename = open("C:\Users\Ankita\Desktop\WS 2015_16\Python\Project\Proj\OutputFiles" + y + ".txt",'w')
         sys.stdout = filename
         line = f.readline()
