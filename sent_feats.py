@@ -87,23 +87,21 @@ for item in sentence_length_corpus(nps_chat_tagged):
 
 print "Total number of sentences in chat corpus: "+ str(num_of_sent(nps_chat_tagged))
 
-
-# Test sentence length for random sentence
-sentence = [("Who","WPO"), ("do","DO"), ("you","PPSS"), ("love","VB"), ("?",".")]
-print "Length of a single sentence: " + str(single_sent_length(sentence))
-
-
+print "\n"
 # Test average sentence length for all corpora
 print "Average sentence length of chat corpus: " + str(sent_length_average(nps_chat_tagged))
 print "Average sentence length of news corpus: " + str(sent_length_average(news_tagged_sents))
 print "Average sentence length of editorial corpus: " + str(sent_length_average(editorial_tagged_sents))
 print "Average sentence length of review corpus: " + str(sent_length_average(review_tagged_sents))
-
+# Test sentence length for random sentence
+sentence = [("Who","WPO"), ("do","DO"), ("you","PPSS"), ("love","VB"), ("?",".")]
+print "Length of a single sentence: " + str(single_sent_length(sentence))
 print "\n"
+# Test average word length for all corpora
 print "Average word length of chat corpus: " + str(word_length_average(nps_chat_tagged))
 print "Average word length of news corpus: " + str(word_length_average(news_tagged_sents))
 print "Average word length of editorial corpus: " + str(word_length_average(editorial_tagged_sents))
 print "Average word length of review corpus: " + str(word_length_average(review_tagged_sents))
-
+# Test word length for random sentence
 sentence = [("Who","WPO"), ("did","DO"), ("you","PPSS"), ("love","VB"), ("?",".")]
 print "Average length of words in single sentence: " + str(single_sent_word_length(sentence))
