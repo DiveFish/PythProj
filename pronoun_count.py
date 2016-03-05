@@ -9,6 +9,7 @@ from nps_tags import nps_chat_tagged
 from tag_set import penn_pron_tags, brown_pron_tags
 
 
+# calculate average of pronouns per sentence in a corpus
 def count_pronouns_corpus(tagged_corpus):
     num_of_pronouns = 0
     num_of_sents = 0
