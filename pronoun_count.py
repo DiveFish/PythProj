@@ -22,6 +22,7 @@ def count_pronouns_corpus(tagged_corpus):
     return pron_per_sent
 
 
+# calculate number of pronouns in a single sentence
 def count_pronouns_sent(tagged_sent):
     num_of_pronouns = 0
     for (word, tag) in tagged_sent:
