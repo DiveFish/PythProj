@@ -4,7 +4,7 @@ Updated on 06 March 2016
 @author: Pat
 """
 
-from tag_set import penn_pron_tags, brown_pron_tags
+from tag_set import penn_pron_tags, brown_pron_tags, penn_punct, brown_punct
 
 
 # calculate average of pronouns per sentence in a corpus
@@ -26,7 +26,8 @@ def count_pronouns_per_words(tagged_corpus):
     num_of_words = 0
     for sent in tagged_corpus:
         for (word, tag) in sent:
-            num_of_words += 1.0
+            if not (penn_punct.__contains__(tag) or brown_punct.__contains__(tag)):
+                num_of_words += 1.0
             if (brown_pron_tags.__contains__(tag)) or (penn_pron_tags.__contains__(tag)):
                 num_of_pronouns += 1.0
     pron_per_word_total = num_of_words/num_of_pronouns
