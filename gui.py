@@ -1,6 +1,6 @@
 """
 Created in Feb 2016
-Updated on 05 March 2016
+Updated on 07 March 2016
 @author: Pat
 """
 
@@ -14,6 +14,7 @@ from nps_tags import nps_chat_tagged
 from pronoun_count import count_pronouns_per_words
 from read_file import read_file
 from sent_feats import sent_length_average, word_length_average
+from tag_set import penn_punct, brown_punct
 from type_token_ratio import ttr_tagged_sents
 
 master = Tk()
@@ -23,68 +24,79 @@ def print_sentences():
     chosen_level = str(level.get())
     chosen_register = str(register.get())
     print "\033[1m"+"5 random sentences of level "+chosen_level+" from the register "+chosen_register+"\033[0m"
-    if chosen_register=="news":
-        if chosen_level=="easy":
+    if chosen_register == "news":
+        if chosen_level == "easy":
             for sentence in random.sample(news_easy,5):
-                print sentence
-        elif chosen_level=="advanced":
+                print_sentence(sentence)
+        elif chosen_level == "advanced":
             for sentence in random.sample(news_advanced,5):
-                print sentence
-        elif chosen_level=="difficult":
+                print_sentence(sentence)
+        elif chosen_level == "difficult":
             for sentence in random.sample(news_difficult,5):
-                print sentence
+                print_sentence(sentence)
         else:
             print "Error. \n"
-    elif chosen_register=="editorial":
-        if chosen_level=="easy":
+    elif chosen_register == "editorial":
+        if chosen_level == "easy":
             for sentence in random.sample(editorial_easy,5):
-                print sentence
-        elif chosen_level=="advanced":
+                print_sentence(sentence)
+        elif chosen_level == "advanced":
             for sentence in random.sample(editorial_advanced,5):
-                print sentence
-        elif chosen_level=="difficult":
+                print_sentence(sentence)
+        elif chosen_level == "difficult":
             for sentence in random.sample(editorial_difficult,5):
-                print sentence
+                print_sentence(sentence)
         else:
             print "Error. \n"
-    elif chosen_register=="reviews":
-        if chosen_level=="easy":
+    elif chosen_register == "reviews":
+        if chosen_level == "easy":
             for sentence in random.sample(reviews_easy,5):
-                print sentence
-        elif chosen_level=="advanced":
+                print_sentence(sentence)
+        elif chosen_level == "advanced":
             for sentence in random.sample(reviews_advanced,5):
-                print sentence
-        elif chosen_level=="difficult":
+                print_sentence(sentence)
+        elif chosen_level == "difficult":
             for sentence in random.sample(reviews_difficult,5):
-                print sentence
+                print_sentence(sentence)
         else:
             print "Error. \n"
-    elif chosen_register=="government":
-        if chosen_level=="easy":
+    elif chosen_register == "government":
+        if chosen_level == "easy":
             for sentence in random.sample(government_easy,5):
-                print sentence
-        elif chosen_level=="advanced":
+                print_sentence(sentence)
+        elif chosen_level == "advanced":
             for sentence in random.sample(government_advanced,5):
-                print sentence
-        elif chosen_level=="difficult":
+                print_sentence(sentence)
+        elif chosen_level == "difficult":
             for sentence in random.sample(government_difficult,5):
-                print sentence
+                print_sentence(sentence)
         else:
-            print "Error."
-    elif chosen_register=="webchat":
-        if chosen_level=="easy":
-            for sentence in random.sample(nps_chat_tagged,5): # chat_easy:
-                print sentence
-        elif chosen_level=="advanced":
-            for sentence in random.sample(nps_chat_tagged,5): #chat_advanced:
-                print sentence
-        elif chosen_level=="difficult":
-            for sentence in random.sample(nps_chat_tagged,5): # chat_difficult:
-                print sentence
+            print "Error. \n"
+    elif chosen_register == "webchat":
+        if chosen_level == "easy":
+            for sentence in random.sample(nps_chat_tagged,5):
+                print_sentence(sentence)
+        elif chosen_level == "advanced":
+            for sentence in random.sample(nps_chat_tagged,5):
+                print_sentence(sentence)
+        elif chosen_level == "difficult":
+            for sentence in random.sample(nps_chat_tagged,5):
+                print_sentence(sentence)
         else:
             print "Error. \n"
     else:
         print "Error. \n"
+
+
+# helper-method for printing a sentence in print_sentences
+def print_sentence(sentence):
+    single_sentence = ""
+    for (word, tag) in sentence:
+        if not (penn_punct.__contains__(tag) or brown_punct.__contains__(tag)):
+            single_sentence += str(word)+" "
+        else:
+            single_sentence = single_sentence[:len(single_sentence)-2]+str(word)+" "
+    print single_sentence
 
 
 def save_sentences_to_file():
@@ -92,72 +104,83 @@ def save_sentences_to_file():
     chosen_register = str(register.get())
     sentence_list = list()
     wr = open(fileName_sentences.get(), "w")
-    if chosen_register=="news":
-        if chosen_level=="easy":
+    if chosen_register == "news":
+        if chosen_level == "easy":
             for sentence in random.sample(news_easy,5):
-                sentence_list.append(sentence)
-        elif chosen_level=="advanced":
+                sentence_list.append(save_sentence(sentence))
+        elif chosen_level == "advanced":
             for sentence in random.sample(news_advanced,5):
-                sentence_list.append(sentence)
-        elif chosen_level=="difficult":
+                sentence_list.append(save_sentence(sentence))
+        elif chosen_level == "difficult":
             for sentence in random.sample(news_difficult,5):
-                sentence_list.append(sentence)
+                sentence_list.append(save_sentence(sentence))
         else:
             wr.write("Error. \n")
-    elif chosen_register=="editorial":
-        if chosen_level=="easy":
+    elif chosen_register == "editorial":
+        if chosen_level == "easy":
             for sentence in random.sample(editorial_easy,5):
-                sentence_list.append(sentence)
-        elif chosen_level=="advanced":
+                sentence_list.append(save_sentence(sentence))
+        elif chosen_level == "advanced":
             for sentence in random.sample(editorial_advanced,5):
-                sentence_list.append(sentence)
-        elif chosen_level=="difficult":
+                sentence_list.append(save_sentence(sentence))
+        elif chosen_level == "difficult":
             for sentence in random.sample(editorial_difficult,5):
-                sentence_list.append(sentence)
+                sentence_list.append(save_sentence(sentence))
         else:
             wr.write("Error. \n")
-    elif chosen_register=="reviews":
-        if chosen_level=="easy":
+    elif chosen_register == "reviews":
+        if chosen_level == "easy":
             for sentence in random.sample(reviews_easy,5):
-                sentence_list.append(sentence)
-        elif chosen_level=="advanced":
+                sentence_list.append(save_sentence(sentence))
+        elif chosen_level == "advanced":
             for sentence in random.sample(reviews_advanced,5):
-                sentence_list.append(sentence)
-        elif chosen_level=="difficult":
+                sentence_list.append(save_sentence(sentence))
+        elif chosen_level == "difficult":
             for sentence in random.sample(reviews_difficult,5):
-                sentence_list.append(sentence)
+                sentence_list.append(save_sentence(sentence))
         else:
             wr.write("Error. \n")
-    elif chosen_register=="government":
-        if chosen_level=="easy":
+    elif chosen_register == "government":
+        if chosen_level == "easy":
             for sentence in random.sample(government_easy,5):
-                sentence_list.append(sentence)
-        elif chosen_level=="advanced":
+                sentence_list.append(save_sentence(sentence))
+        elif chosen_level == "advanced":
             for sentence in random.sample(government_advanced,5):
-                sentence_list.append(sentence)
-        elif chosen_level=="difficult":
+                sentence_list.append(save_sentence(sentence))
+        elif chosen_level == "difficult":
             for sentence in random.sample(government_difficult,5):
-                sentence_list.append(sentence)
+                sentence_list.append(save_sentence(sentence))
         else:
             wr.write("Error. \n")
-    elif chosen_register=="webchat":
-        if chosen_level=="easy":
-            for sentence in random.sample(nps_chat_tagged,5):#chat_easy:
-                sentence_list.append(sentence)
-        elif chosen_level=="advanced":
-            for sentence in random.sample(nps_chat_tagged,5):#chat_advanced:
-                sentence_list.append(sentence)
-        elif chosen_level=="difficult":
-            for sentence in random.sample(nps_chat_tagged,5):#chat_difficult:
-                sentence_list.append(sentence)
+    elif chosen_register == "webchat":
+        if chosen_level == "easy":
+            for sentence in random.sample(nps_chat_tagged,5):
+                sentence_list.append(save_sentence(sentence))
+        elif chosen_level == "advanced":
+            for sentence in random.sample(nps_chat_tagged,5):
+                sentence_list.append(save_sentence(sentence))
+        elif chosen_level == "difficult":
+            for sentence in random.sample(nps_chat_tagged,5):
+                sentence_list.append(save_sentence(sentence))
         else:
             wr.write("Error. \n")
     else:
         wr.write("Error. \n")
-    wr.write("5 RANDOM SENTENCES OF LEVEL <"+chosen_level+"> FROM THE REGISTER <"+chosen_register+">\n")
+    wr.write("5 RANDOM SENTENCES OF LEVEL <"+chosen_level+"> FROM THE REGISTER <"+chosen_register+">\n\n")
     for item in sentence_list:
-        wr.write(str(item)+"\n")
+        wr.write("  "+str(item)+"\n")
     wr.close()
+
+
+# helper-method for saving a sentence in save_sentences_to_file
+def save_sentence(sentence):
+    single_sentence = ""
+    for (word,tag) in sentence:
+        if not (penn_punct.__contains__(tag) or brown_punct.__contains__(tag)):
+            single_sentence += str(word)+" "
+        else:
+            single_sentence = single_sentence[:len(single_sentence)-2]+str(word)+" "
+    return single_sentence
 
 
 # not working
