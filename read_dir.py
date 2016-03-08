@@ -8,7 +8,7 @@ from collections import Counter
 import os
 import sys
 
-def read_file(path):
+def read_dir(path):
 
     #newpath is the path where the folder for the output files is created
     newpath = path
@@ -36,4 +36,4 @@ def read_file(path):
                 line = f.readline()
             f.close()
 
-read_file('C:\Users\Ankita\Desktop\WS 2015_16\Python\Project\Proj\InputFiles\ParsedFiles')
+read_dir('C:\Users\Ankita\Desktop\WS 2015_16\Python\Project\Proj\InputFiles\ParsedFiles')
