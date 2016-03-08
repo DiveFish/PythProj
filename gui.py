@@ -209,22 +209,21 @@ def save_analysis_to_file():
     parsed_file = read_file(directory.get())
     if parsed_file.endswith(".txt"):
         wr = open(fileName_analysis.get(), "w")
-        if parsed_file.endswith(".txt"):
-            sent_length = sent_length_average(parsed_file)
-            word_length= word_length_average(parsed_file)
-            pron_count = count_pronouns_per_words(parsed_file)
-            ttr = ttr_tagged_sents(parsed_file)
-            wr.write("The average sentence length is "+str(sent_length_average(parsed_file))+"\n")
-            wr.write("The average word length is "+str(word_length_average(parsed_file))+"\n")
-            wr.write("The average number of pronouns per total number of words is "+str(count_pronouns_per_words(parsed_file))+"\n")
-            wr.write("The type-token ratio is "+str(ttr_tagged_sents(parsed_file))+"\n")
-            complexity = (sent_length+word_length+pron_count+ttr)/4
-            if complexity < 5:
-                wr.write("->> The overall complexity of the given text is EASY \n")
-            elif 5 <= complexity < 8:
-                wr.write("->> The overall complexity of the given text is ADVANCED \n")
-            else:
-                wr.write("->> The overall complexity of the given text is DIFFICULT \n")
+        sent_length = sent_length_average(parsed_file)
+        word_length= word_length_average(parsed_file)
+        pron_count = count_pronouns_per_words(parsed_file)
+        ttr = ttr_tagged_sents(parsed_file)
+        wr.write("The average sentence length is "+str(sent_length_average(parsed_file))+"\n")
+        wr.write("The average word length is "+str(word_length_average(parsed_file))+"\n")
+        wr.write("The average number of pronouns per total number of words is "+str(count_pronouns_per_words(parsed_file))+"\n")
+        wr.write("The type-token ratio is "+str(ttr_tagged_sents(parsed_file))+"\n")
+        complexity = (sent_length+word_length+pron_count+ttr)/4
+        if complexity < 5:
+            wr.write("->> The overall complexity of the given text is EASY \n")
+        elif 5 <= complexity < 8:
+            wr.write("->> The overall complexity of the given text is ADVANCED \n")
+        else:
+            wr.write("->> The overall complexity of the given text is DIFFICULT \n")
         wr.close()
 
 
