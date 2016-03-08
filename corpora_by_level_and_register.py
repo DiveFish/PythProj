@@ -5,8 +5,6 @@ Updated on 09 March 2016
 """
 from nltk.corpus import brown, nps_chat
 
-from nps_tags import nps_chat_tagged
-
 
 news_easy = list()
 for sentence in brown.tagged_sents(fileids="ca14"):
