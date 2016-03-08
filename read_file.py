@@ -11,10 +11,7 @@ import ntpath
 
 
 def read_file(path):
-    head, tail = os.path.split(path)
-    print head
-    print tail
-
+    
     user_file = ntpath.basename(path)
     if user_file.endswith(".txt"):
         f = open(user_file, "r")
@@ -30,5 +27,7 @@ def read_file(path):
         f.close()
     return parsed_list
 
-read_file('C:\Users\Ankita\Desktop\WS 2015_16\Python\Project\Proj\Trial\input.txt')
+# enter complete path of input file in place of ...
+for item in read_file('...'):
+    print item
 
