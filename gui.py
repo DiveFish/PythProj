@@ -1,6 +1,6 @@
 """
 Created in Feb 2016
-Updated on 07 March 2016
+Updated on 08 March 2016
 @author: Pat
 """
 
@@ -23,7 +23,7 @@ master = Tk()
 def print_sentences():
     chosen_level = str(level.get())
     chosen_register = str(register.get())
-    print "\033[1m"+"5 random sentences of level "+chosen_level+" from the register "+chosen_register+"\033[0m"
+    print "\033[1m \n 5 random sentences of level <"+chosen_level+"> from the register <"+chosen_register+"> \033[0m"
     if chosen_register == "news":
         if chosen_level == "easy":
             for sentence in random.sample(news_easy,5):
@@ -88,7 +88,7 @@ def print_sentences():
         print "Error. \n"
 
 
-# helper-method for printing a sentence in print_sentences
+# helper-method for printing one sentence in print_sentences
 def print_sentence(sentence):
     single_sentence = ""
     for (word, tag) in sentence:
@@ -172,7 +172,7 @@ def save_sentences_to_file():
     wr.close()
 
 
-# helper-method for saving a sentence in save_sentences_to_file
+# helper-method for saving one sentence in save_sentences_to_file
 def save_sentence(sentence):
     single_sentence = ""
     for (word,tag) in sentence:
@@ -183,35 +183,32 @@ def save_sentence(sentence):
     return single_sentence
 
 
-# not working
+# not working yet
 def print_analysis():
-    read_file(directory.get())
-    parsed_files_directory = directory.get() + "\InputFiles"
-    for parsed_file in parsed_files_directory:
-        if parsed_file.endswith(".txt"):
-            sent_length = sent_length_average(parsed_file)
-            word_length= word_length_average(parsed_file)
-            pron_count = count_pronouns_per_words(parsed_file)
-            ttr = ttr_tagged_sents(parsed_file)
-            print "The overall complexity of the given text is ...?"
-            print "The average sentence length is "+str(sent_length_average(parsed_file))
-            print "The average word length is "+str(word_length_average(parsed_file))
-            print "The average number of pronouns per total number of words is "+str(count_pronouns_per_words(parsed_file))
-            print "The type-token ratio is "+str(ttr_tagged_sents(parsed_file))
-            complexity = (sent_length+word_length+pron_count+ttr)/4
-            if complexity < 5:
-                print "->> The overall complexity of the given text is easy \n"
-            elif 5 <= complexity < 8:
-                print "->> The overall complexity of the given text is advanced \n"
-            else:
-                print "->> The overall complexity of the given text is difficult \n"
+    parsed_file = read_file(directory.get())
+    if parsed_file.endswith(".txt"):
+        sent_length = sent_length_average(parsed_file)
+        word_length= word_length_average(parsed_file)
+        pron_count = count_pronouns_per_words(parsed_file)
+        ttr = ttr_tagged_sents(parsed_file)
+        print "The average sentence length is "+str(sent_length_average(parsed_file))
+        print "The average word length is "+str(word_length_average(parsed_file))
+        print "The average number of pronouns per total number of words is "+str(count_pronouns_per_words(parsed_file))
+        print "The type-token ratio is "+str(ttr_tagged_sents(parsed_file))
+        complexity = (sent_length+word_length+pron_count+ttr)/4
+        if complexity < 5:
+            print "\033[1m ->> The overall complexity of the given text is easy \033[0m \n"
+        elif 5 <= complexity < 8:
+            print "\033[1m ->> The overall complexity of the given text is advanced \033[0m \n"
+        else:
+            print "\033[1m ->> The overall complexity of the given text is difficult \033[0m \n"
 
 
-def save_analysis_to_file_general_not_working():
-    read_file(directory.get())
-    parsed_files_directory = directory.get() + "\InputFiles"
-    wr = open(fileName_analysis.get(), "w")
-    for parsed_file in parsed_files_directory:
+# not working yet
+def save_analysis_to_file():
+    parsed_file = read_file(directory.get())
+    if parsed_file.endswith(".txt"):
+        wr = open(fileName_analysis.get(), "w")
         if parsed_file.endswith(".txt"):
             sent_length = sent_length_average(parsed_file)
             word_length= word_length_average(parsed_file)
@@ -223,34 +220,12 @@ def save_analysis_to_file_general_not_working():
             wr.write("The type-token ratio is "+str(ttr_tagged_sents(parsed_file))+"\n")
             complexity = (sent_length+word_length+pron_count+ttr)/4
             if complexity < 5:
-                wr.write("->> The overall complexity of the given text is easy \n")
+                wr.write("->> The overall complexity of the given text is EASY \n")
             elif 5 <= complexity < 8:
-                wr.write("->> The overall complexity of the given text is advanced \n")
+                wr.write("->> The overall complexity of the given text is ADVANCED \n")
             else:
-                wr.write("->> The overall complexity of the given text is difficult \n")
-    wr.close()
-
-
-# would only have to replace "nps_chat_tagged" with tagged user corpus
-def save_analysis_to_file():
-    wr = open(fileName_analysis.get(), "w")
-    wr.write("\n")
-    sent_length = sent_length_average(nps_chat_tagged)
-    word_length = word_length_average(nps_chat_tagged)
-    pron_count = count_pronouns_per_words(nps_chat_tagged)
-    ttr = ttr_tagged_sents(nps_chat_tagged)
-    wr.write("The average sentence length is "+str(sent_length)+"\n")
-    wr.write("The average word length is "+str(word_length)+"\n")
-    wr.write("The average number of pronouns per total number of words is "+str(pron_count)+"\n")
-    wr.write("The type-token ratio is "+str(ttr)+"\n")
-    complexity = (sent_length+word_length+pron_count+ttr)/4
-    if complexity < 5:
-        wr.write("->> The overall complexity of the given text is easy \n")
-    elif 5 <= complexity < 8:
-        wr.write("->> The overall complexity of the given text is advanced \n")
-    else:
-        wr.write("->> The overall complexity of the given text is difficult \n")
-    wr.close()
+                wr.write("->> The overall complexity of the given text is DIFFICULT \n")
+        wr.close()
 
 
 Label(text="\n").pack()
