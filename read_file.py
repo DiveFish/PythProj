@@ -21,7 +21,7 @@ def read_file(path):
             text = nltk.word_tokenize(line)
 
             tags = nltk.pos_tag(text)
-            parsed_list = parsed_list + tags
+            parsed_list.append(tags)
 
             line = f.readline()
         f.close()
