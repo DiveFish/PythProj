@@ -283,8 +283,10 @@ Label(text="\n").pack()
 
 
 # field to enter directory of files for which user wants complexity level
-Label(master, text="Want a text of your own evaluated? \n Just enter the directory of the .txt file(s) here: ",
+Label(master, text="Want a text of your own evaluated? \n Just enter the directory of the .txt file here: ",
       font = "normal 11 bold").pack()
+Label(master, text="! please only use a file from your current Python working directory !",
+      font = "normal 8").pack()
 directory=Entry(master)
 directory.pack()
 Label(text="\n").pack()
