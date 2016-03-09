@@ -1,7 +1,7 @@
 """
 Created in Feb 2016
-Updated on 08 March 2016
-@author: Pat
+Updated on 10 March 2016
+@author:pat
 """
 
 import random
@@ -9,8 +9,7 @@ from Tkinter import *
 
 from corpora_by_level_and_register import news_easy, news_advanced, news_difficult, editorial_easy, editorial_advanced, \
     editorial_difficult, reviews_easy, reviews_advanced, reviews_difficult, government_easy, government_advanced, \
-    government_difficult
-from nps_tags import nps_chat_tagged
+    government_difficult, chat_easy, chat_advanced, chat_difficult
 from pronoun_count import count_pronouns_per_words
 from read_file import read_file
 from sent_feats import sent_length_average, word_length_average
@@ -23,64 +22,69 @@ master = Tk()
 def print_sentences():
     chosen_level = str(level.get())
     chosen_register = str(register.get())
-    print "\033[1m \n 5 random sentences of level <"+chosen_level+"> from the register <"+chosen_register+"> \033[0m"
+    if chosen_level == "easy" or chosen_level == "advanced":
+        print "\033[1m \n 5 random sentences from an "+chosen_level+" "+chosen_register+" text: \033[0m"
+    elif chosen_level == "difficult":
+        print "\033[1m \n 5 random sentences from a "+chosen_level+" "+chosen_register+" text: \033[0m"
+    else:
+        print "Error. \n"
     if chosen_register == "news":
         if chosen_level == "easy":
-            for sentence in random.sample(news_easy,5):
+            for sentence in random.sample(news_easy, 5):
                 print_sentence(sentence)
         elif chosen_level == "advanced":
-            for sentence in random.sample(news_advanced,5):
+            for sentence in random.sample(news_advanced, 5):
                 print_sentence(sentence)
         elif chosen_level == "difficult":
-            for sentence in random.sample(news_difficult,5):
+            for sentence in random.sample(news_difficult, 5):
                 print_sentence(sentence)
         else:
             print "Error. \n"
     elif chosen_register == "editorial":
         if chosen_level == "easy":
-            for sentence in random.sample(editorial_easy,5):
+            for sentence in random.sample(editorial_easy, 5):
                 print_sentence(sentence)
         elif chosen_level == "advanced":
-            for sentence in random.sample(editorial_advanced,5):
+            for sentence in random.sample(editorial_advanced, 5):
                 print_sentence(sentence)
         elif chosen_level == "difficult":
-            for sentence in random.sample(editorial_difficult,5):
+            for sentence in random.sample(editorial_difficult, 5):
                 print_sentence(sentence)
         else:
             print "Error. \n"
     elif chosen_register == "reviews":
         if chosen_level == "easy":
-            for sentence in random.sample(reviews_easy,5):
+            for sentence in random.sample(reviews_easy, 5):
                 print_sentence(sentence)
         elif chosen_level == "advanced":
-            for sentence in random.sample(reviews_advanced,5):
+            for sentence in random.sample(reviews_advanced, 5):
                 print_sentence(sentence)
         elif chosen_level == "difficult":
-            for sentence in random.sample(reviews_difficult,5):
+            for sentence in random.sample(reviews_difficult, 5):
                 print_sentence(sentence)
         else:
             print "Error. \n"
     elif chosen_register == "government":
         if chosen_level == "easy":
-            for sentence in random.sample(government_easy,5):
+            for sentence in random.sample(government_easy, 5):
                 print_sentence(sentence)
         elif chosen_level == "advanced":
-            for sentence in random.sample(government_advanced,5):
+            for sentence in random.sample(government_advanced, 5):
                 print_sentence(sentence)
         elif chosen_level == "difficult":
-            for sentence in random.sample(government_difficult,5):
+            for sentence in random.sample(government_difficult, 5):
                 print_sentence(sentence)
         else:
             print "Error. \n"
     elif chosen_register == "webchat":
         if chosen_level == "easy":
-            for sentence in random.sample(nps_chat_tagged,5):
+            for sentence in random.sample(chat_easy, 5):
                 print_sentence(sentence)
         elif chosen_level == "advanced":
-            for sentence in random.sample(nps_chat_tagged,5):
+            for sentence in random.sample(chat_advanced, 5):
                 print_sentence(sentence)
         elif chosen_level == "difficult":
-            for sentence in random.sample(nps_chat_tagged,5):
+            for sentence in random.sample(chat_difficult, 5):
                 print_sentence(sentence)
         else:
             print "Error. \n"
@@ -95,7 +99,7 @@ def print_sentence(sentence):
         if not (penn_punct.__contains__(tag) or brown_punct.__contains__(tag)):
             single_sentence += str(word)+" "
         else:
-            single_sentence = single_sentence[:len(single_sentence)-2]+str(word)+" "
+            single_sentence = single_sentence[:len(single_sentence)-1]+str(word)+" "
     print single_sentence
 
 
@@ -106,67 +110,72 @@ def save_sentences_to_file():
     wr = open(fileName_sentences.get(), "w")
     if chosen_register == "news":
         if chosen_level == "easy":
-            for sentence in random.sample(news_easy,5):
+            for sentence in random.sample(news_easy, 5):
                 sentence_list.append(save_sentence(sentence))
         elif chosen_level == "advanced":
-            for sentence in random.sample(news_advanced,5):
+            for sentence in random.sample(news_advanced, 5):
                 sentence_list.append(save_sentence(sentence))
         elif chosen_level == "difficult":
-            for sentence in random.sample(news_difficult,5):
+            for sentence in random.sample(news_difficult, 5):
                 sentence_list.append(save_sentence(sentence))
         else:
             wr.write("Error. \n")
     elif chosen_register == "editorial":
         if chosen_level == "easy":
-            for sentence in random.sample(editorial_easy,5):
+            for sentence in random.sample(editorial_easy, 5):
                 sentence_list.append(save_sentence(sentence))
         elif chosen_level == "advanced":
-            for sentence in random.sample(editorial_advanced,5):
+            for sentence in random.sample(editorial_advanced, 5):
                 sentence_list.append(save_sentence(sentence))
         elif chosen_level == "difficult":
-            for sentence in random.sample(editorial_difficult,5):
+            for sentence in random.sample(editorial_difficult, 5):
                 sentence_list.append(save_sentence(sentence))
         else:
             wr.write("Error. \n")
     elif chosen_register == "reviews":
         if chosen_level == "easy":
-            for sentence in random.sample(reviews_easy,5):
+            for sentence in random.sample(reviews_easy, 5):
                 sentence_list.append(save_sentence(sentence))
         elif chosen_level == "advanced":
-            for sentence in random.sample(reviews_advanced,5):
+            for sentence in random.sample(reviews_advanced, 5):
                 sentence_list.append(save_sentence(sentence))
         elif chosen_level == "difficult":
-            for sentence in random.sample(reviews_difficult,5):
+            for sentence in random.sample(reviews_difficult, 5):
                 sentence_list.append(save_sentence(sentence))
         else:
             wr.write("Error. \n")
     elif chosen_register == "government":
         if chosen_level == "easy":
-            for sentence in random.sample(government_easy,5):
+            for sentence in random.sample(government_easy, 5):
                 sentence_list.append(save_sentence(sentence))
         elif chosen_level == "advanced":
-            for sentence in random.sample(government_advanced,5):
+            for sentence in random.sample(government_advanced, 5):
                 sentence_list.append(save_sentence(sentence))
         elif chosen_level == "difficult":
-            for sentence in random.sample(government_difficult,5):
+            for sentence in random.sample(government_difficult, 5):
                 sentence_list.append(save_sentence(sentence))
         else:
             wr.write("Error. \n")
     elif chosen_register == "webchat":
         if chosen_level == "easy":
-            for sentence in random.sample(nps_chat_tagged,5):
+            for sentence in random.sample(chat_easy, 5):
                 sentence_list.append(save_sentence(sentence))
         elif chosen_level == "advanced":
-            for sentence in random.sample(nps_chat_tagged,5):
+            for sentence in random.sample(chat_advanced, 5):
                 sentence_list.append(save_sentence(sentence))
         elif chosen_level == "difficult":
-            for sentence in random.sample(nps_chat_tagged,5):
+            for sentence in random.sample(chat_difficult, 5):
                 sentence_list.append(save_sentence(sentence))
         else:
             wr.write("Error. \n")
     else:
         wr.write("Error. \n")
-    wr.write("5 RANDOM SENTENCES OF LEVEL <"+chosen_level+"> FROM THE REGISTER <"+chosen_register+">\n\n")
+    if chosen_level == "easy" or chosen_level == "advanced":
+        wr.write("5 RANDOM SENTENCES FROM AN "+chosen_level+" "+chosen_register+" TEXT: \n")
+    elif chosen_level == "difficult":
+        wr.write("5 RANDOM SENTENCES FROM A "+chosen_level+" "+chosen_register+" TEXT: \n")
+    else:
+        print "Error. \n"
     for item in sentence_list:
         wr.write("  "+str(item)+"\n")
     wr.close()
@@ -179,52 +188,56 @@ def save_sentence(sentence):
         if not (penn_punct.__contains__(tag) or brown_punct.__contains__(tag)):
             single_sentence += str(word)+" "
         else:
-            single_sentence = single_sentence[:len(single_sentence)-2]+str(word)+" "
+            single_sentence = single_sentence[:len(single_sentence)-1]+str(word)+" "
     return single_sentence
 
 
-# not working yet
 def print_analysis():
-    parsed_file = read_file(directory.get())
-    if parsed_file.endswith(".txt"):
-        sent_length = sent_length_average(parsed_file)
-        word_length= word_length_average(parsed_file)
-        pron_count = count_pronouns_per_words(parsed_file)
-        ttr = ttr_tagged_sents(parsed_file)
-        print "The average sentence length is "+str(sent_length_average(parsed_file))
-        print "The average word length is "+str(word_length_average(parsed_file))
-        print "The average number of pronouns per total number of words is "+str(count_pronouns_per_words(parsed_file))
-        print "The type-token ratio is "+str(ttr_tagged_sents(parsed_file))
-        complexity = (sent_length+word_length+pron_count+ttr)/4
-        if complexity < 5:
-            print "\033[1m ->> The overall complexity of the given text is easy \033[0m \n"
-        elif 5 <= complexity < 8:
-            print "\033[1m ->> The overall complexity of the given text is advanced \033[0m \n"
-        else:
-            print "\033[1m ->> The overall complexity of the given text is difficult \033[0m \n"
+    tagged_file = read_file(directory.get())
+    sent_length = sent_length_average(tagged_file)
+    word_length = word_length_average(tagged_file)
+    pron_count = count_pronouns_per_words(tagged_file)
+    ttr = ttr_tagged_sents(tagged_file)
+    print "The average sentence length is "+str(sent_length_average(tagged_file))
+    print "The average word length is "+str(word_length_average(tagged_file))
+    print "The number of pronouns per total number of words is "+str(count_pronouns_per_words(tagged_file))
+    print "The type-token ratio is "+str(ttr_tagged_sents(tagged_file))
+    trad_complexity = (sent_length+word_length)/2
+    lex_complexity = (pron_count+ttr)/2
+    complexity = (sent_length+word_length+pron_count+ttr)/4
+    if complexity < 5:
+        print "\033[1m ->> The overall complexity of the given text is easy \033[0m \n"
+    elif 5 <= complexity < 8:
+        print "\033[1m ->> The overall complexity of the given text is advanced \033[0m \n"
+    else:
+        print "\033[1m ->> The overall complexity of the given text is difficult \033[0m \n"
+    print "<-- The TRADITIONAL complexity is "+str(trad_complexity)+"\n"
+    print "<-- The LEXICAL complexity is "+str(lex_complexity)+"\n"
 
 
-# not working yet
 def save_analysis_to_file():
-    parsed_file = read_file(directory.get())
-    if parsed_file.endswith(".txt"):
-        wr = open(fileName_analysis.get(), "w")
-        sent_length = sent_length_average(parsed_file)
-        word_length= word_length_average(parsed_file)
-        pron_count = count_pronouns_per_words(parsed_file)
-        ttr = ttr_tagged_sents(parsed_file)
-        wr.write("The average sentence length is "+str(sent_length_average(parsed_file))+"\n")
-        wr.write("The average word length is "+str(word_length_average(parsed_file))+"\n")
-        wr.write("The average number of pronouns per total number of words is "+str(count_pronouns_per_words(parsed_file))+"\n")
-        wr.write("The type-token ratio is "+str(ttr_tagged_sents(parsed_file))+"\n")
-        complexity = (sent_length+word_length+pron_count+ttr)/4
-        if complexity < 5:
-            wr.write("->> The overall complexity of the given text is EASY \n")
-        elif 5 <= complexity < 8:
-            wr.write("->> The overall complexity of the given text is ADVANCED \n")
-        else:
-            wr.write("->> The overall complexity of the given text is DIFFICULT \n")
-        wr.close()
+    wr = open(fileName_analysis.get(), "w")
+    tagged_file = read_file(directory.get())
+    sent_length = sent_length_average(tagged_file)
+    word_length = word_length_average(tagged_file)
+    pron_count = count_pronouns_per_words(tagged_file)
+    ttr = ttr_tagged_sents(tagged_file)
+    wr.write("The average sentence length is "+str(sent_length_average(tagged_file))+"\n")
+    wr.write("The average word length is "+str(word_length_average(tagged_file))+"\n")
+    wr.write("The number of pronouns per total number of words is "+str(count_pronouns_per_words(tagged_file))+"\n")
+    wr.write("The type-token ratio is "+str(ttr_tagged_sents(tagged_file))+"\n")
+    trad_complexity = (sent_length+word_length)/2
+    lex_complexity = (pron_count+ttr)/2
+    complexity = (sent_length+word_length+pron_count+ttr)/4
+    if complexity < 5:
+        wr.write("->> The OVERALL COMPLEXITY of the given text is EASY \n")
+    elif 5 <= complexity < 8:
+        wr.write("->> The OVERALL COMPLEXITY of the given text is ADVANCED \n")
+    else:
+        wr.write("->> The OVERALL COMPLEXITY of the given text is DIFFICULT \n")
+    wr.write("<-- The TRADITIONAL complexity is "+str(trad_complexity)+"\n")
+    wr.write("<-- The LEXICAL complexity is "+str(lex_complexity)+"\n")
+    wr.close()
 
 
 Label(text="\n").pack()
@@ -288,3 +301,13 @@ f.pack()
 
 master.title("Complexity Analysis")
 mainloop()
+
+
+
+
+"""
+Blueprint for changing font style:
+
+Label(master, text="Green Text in Helvetica Font", fg = "light green", bg = "dark green",
+        font = "Helvetica 16 italic").pack()
+"""
