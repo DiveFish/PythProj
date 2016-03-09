@@ -9,11 +9,13 @@ import os
 import sys
 import ntpath
 
+
 def read_input(path):
     if os.path.isfile(path):
         read_file(path)
     else:
         read_dir(path)
+
 
 def read_file(path):
     #os.getcwd()
@@ -29,8 +31,7 @@ def read_file(path):
             parsed_list.append(tags)
             line = f.readline()
         f.close()
-    for item in parsed_list:
-        print item
+    return parsed_list
 
 
 def read_dir(path):
@@ -60,7 +61,3 @@ def read_dir(path):
                 print '\n'
                 line = f.readline()
             f.close()
-
-#change paths accordingly. For reading a file, the input file should be in the same working directory.
-read_input('C:\Users\Ankita\Desktop\WS 2015_16\Python\Project\Proj\input.txt')
-read_input('C:\Users\Ankita\Desktop\WS 2015_16\Python\Project\Proj\InputFiles\ParsedFiles')
