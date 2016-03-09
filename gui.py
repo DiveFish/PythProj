@@ -1,6 +1,6 @@
 """
 Created in Feb 2016
-Updated on 10 March 2016
+Updated on 09 March 2016
 @author:pat
 """
 
@@ -10,7 +10,7 @@ from Tkinter import *
 from corpora_by_level_and_register import news_easy, news_advanced, news_difficult, editorial_easy, editorial_advanced, \
     editorial_difficult, reviews_easy, reviews_advanced, reviews_difficult, government_easy, government_advanced, \
     government_difficult, chat_easy, chat_advanced, chat_difficult
-from pronoun_count import count_pronouns_per_words
+from pronoun_count import count_pronouns_per_sentence
 from read_file import read_file
 from sent_feats import sent_length_average, word_length_average
 from tag_set import penn_punct, brown_punct
@@ -194,49 +194,55 @@ def save_sentence(sentence):
 
 def print_analysis():
     tagged_file = read_file(directory.get())
-    sent_length = sent_length_average(tagged_file)
-    word_length = word_length_average(tagged_file)
-    pron_count = count_pronouns_per_words(tagged_file)
-    ttr = ttr_tagged_sents(tagged_file)
-    print "The average sentence length is "+str(sent_length_average(tagged_file))
-    print "The average word length is "+str(word_length_average(tagged_file))
-    print "The number of pronouns per total number of words is "+str(count_pronouns_per_words(tagged_file))
-    print "The type-token ratio is "+str(ttr_tagged_sents(tagged_file))
-    trad_complexity = (sent_length+word_length)/2
-    lex_complexity = (pron_count+ttr)/2
-    complexity = (sent_length+word_length+pron_count+ttr)/4
-    if complexity < 5:
-        print "\033[1m ->> The overall complexity of the given text is easy \033[0m \n"
-    elif 5 <= complexity < 8:
-        print "\033[1m ->> The overall complexity of the given text is advanced \033[0m \n"
+    if tagged_file.__len__() == 0:
+        print "ERROR: Empty file."
     else:
-        print "\033[1m ->> The overall complexity of the given text is difficult \033[0m \n"
-    print "<-- The TRADITIONAL complexity is "+str(trad_complexity)+"\n"
-    print "<-- The LEXICAL complexity is "+str(lex_complexity)+"\n"
+        sent_length = sent_length_average(tagged_file)
+        word_length = word_length_average(tagged_file)
+        pron_count = count_pronouns_per_sentence(tagged_file)
+        ttr = ttr_tagged_sents(tagged_file)
+        print "The average sentence length is "+str(sent_length)
+        print "The average word length is "+str(word_length)
+        print "The number of pronouns per number of sentences is "+str(pron_count)
+        print "The type-token ratio is "+str(ttr)
+        trad_complexity = (sent_length+word_length)/2
+        lex_complexity = (pron_count+(1/ttr))/2
+        complexity = (sent_length+word_length+pron_count+(1/ttr))/4
+        if complexity < 5:
+            print "\033[1m ->> The overall complexity of the given text is easy \033[0m \n"
+        elif 5 <= complexity < 8:
+            print "\033[1m ->> The overall complexity of the given text is advanced \033[0m \n"
+        else:
+            print "\033[1m ->> The overall complexity of the given text is difficult \033[0m \n"
+        print "<-- The TRADITIONAL complexity is "+str(trad_complexity)+"\n"
+        print "<-- The LEXICAL complexity is "+str(lex_complexity)+"\n"
 
 
 def save_analysis_to_file():
     wr = open(fileName_analysis.get(), "w")
     tagged_file = read_file(directory.get())
-    sent_length = sent_length_average(tagged_file)
-    word_length = word_length_average(tagged_file)
-    pron_count = count_pronouns_per_words(tagged_file)
-    ttr = ttr_tagged_sents(tagged_file)
-    wr.write("The average sentence length is "+str(sent_length_average(tagged_file))+"\n")
-    wr.write("The average word length is "+str(word_length_average(tagged_file))+"\n")
-    wr.write("The number of pronouns per total number of words is "+str(count_pronouns_per_words(tagged_file))+"\n")
-    wr.write("The type-token ratio is "+str(ttr_tagged_sents(tagged_file))+"\n")
-    trad_complexity = (sent_length+word_length)/2
-    lex_complexity = (pron_count+ttr)/2
-    complexity = (sent_length+word_length+pron_count+ttr)/4
-    if complexity < 5:
-        wr.write("->> The OVERALL COMPLEXITY of the given text is EASY \n")
-    elif 5 <= complexity < 8:
-        wr.write("->> The OVERALL COMPLEXITY of the given text is ADVANCED \n")
+    if tagged_file.__len__() == 0:
+        wr.write("ERROR: Empty file.")
     else:
-        wr.write("->> The OVERALL COMPLEXITY of the given text is DIFFICULT \n")
-    wr.write("<-- The TRADITIONAL complexity is "+str(trad_complexity)+"\n")
-    wr.write("<-- The LEXICAL complexity is "+str(lex_complexity)+"\n")
+        sent_length = sent_length_average(tagged_file)
+        word_length = word_length_average(tagged_file)
+        pron_count = count_pronouns_per_sentence(tagged_file)
+        ttr = ttr_tagged_sents(tagged_file)
+        wr.write("The average sentence length is "+str(sent_length)+"\n")
+        wr.write("The average word length is "+str(word_length)+"\n")
+        wr.write("The number of pronouns per number of sentences is "+str(pron_count)+"\n")
+        wr.write("The type-token ratio is "+str(ttr)+"\n")
+        trad_complexity = (sent_length+word_length)/2
+        lex_complexity = (pron_count+(1/ttr))/2
+        complexity = (sent_length+word_length+pron_count+(1/ttr))/4
+        if complexity < 5:
+            wr.write("->> The OVERALL COMPLEXITY of the given text is EASY \n")
+        elif 5 <= complexity < 8:
+            wr.write("->> The OVERALL COMPLEXITY of the given text is ADVANCED \n")
+        else:
+            wr.write("->> The OVERALL COMPLEXITY of the given text is DIFFICULT \n")
+        wr.write("<-- The TRADITIONAL complexity is "+str(trad_complexity)+"\n")
+        wr.write("<-- The LEXICAL complexity is "+str(lex_complexity)+"\n")
     wr.close()
 
 
@@ -301,13 +307,3 @@ f.pack()
 
 master.title("Complexity Analysis")
 mainloop()
-
-
-
-
-"""
-Blueprint for changing font style:
-
-Label(master, text="Green Text in Helvetica Font", fg = "light green", bg = "dark green",
-        font = "Helvetica 16 italic").pack()
-"""
