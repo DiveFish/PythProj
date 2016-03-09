@@ -1,5 +1,5 @@
 # Complexity Analysis
-Some simple steps to get to know the functionalities of the complexity analysis program:
+Some simple steps to get to know the functionalities of the complexity analysis program (it is assumed that nltk_data has been downloaded):
 
 1. Run the gui!
 2. << To get 5 random sentences of a certain level and register, select a level and a register.
