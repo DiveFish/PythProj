@@ -11,7 +11,7 @@ from corpora_by_level_and_register import news_easy, news_advanced, news_difficu
     editorial_difficult, reviews_easy, reviews_advanced, reviews_difficult, government_easy, government_advanced, \
     government_difficult, chat_easy, chat_advanced, chat_difficult
 from pronoun_count import count_pronouns_per_sentence
-from read_file import read_file
+from read_input import read_file
 from sent_feats import sent_length_average, word_length_average
 from tag_set import penn_punct, brown_punct
 from type_token_ratio import ttr_tagged_sents
@@ -194,7 +194,7 @@ def save_sentence(sentence):
 
 def print_analysis():
     tagged_file = read_file(directory.get())
-    if tagged_file.__len__() == 0:
+    if not tagged_file:
         print "ERROR: Empty file."
     else:
         sent_length = sent_length_average(tagged_file)
@@ -221,7 +221,7 @@ def print_analysis():
 def save_analysis_to_file():
     wr = open(fileName_analysis.get(), "w")
     tagged_file = read_file(directory.get())
-    if tagged_file.__len__() == 0:
+    if not tagged_file:
         wr.write("ERROR: Empty file.")
     else:
         sent_length = sent_length_average(tagged_file)
