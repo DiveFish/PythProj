@@ -61,6 +61,6 @@ def read_dir(path):
                 line = f.readline()
             f.close()
 
-
+#change paths accordingly. For reading a file, the input file should be in the same working directory.
 read_input('C:\Users\Ankita\Desktop\WS 2015_16\Python\Project\Proj\input.txt')
 read_input('C:\Users\Ankita\Desktop\WS 2015_16\Python\Project\Proj\InputFiles\ParsedFiles')
